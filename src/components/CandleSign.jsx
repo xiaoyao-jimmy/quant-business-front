@@ -5,6 +5,7 @@ import {SearchOutlined} from '@ant-design/icons';
 import {getCandleStickSign} from '../api/CandleStickSign.js'
 import {useState} from "react";
 import dayjs from "dayjs";
+import CandleDraw from "./CandleDraw.jsx";
 
 
 function CandleStickSign() {
@@ -22,7 +23,6 @@ function CandleStickSign() {
         render: (_, { candlestick_sign }) => (
             <>
                 {JSON.parse(candlestick_sign).map((sign) => {
-                    console.log(sign)
                     return (
                         <Tag key={sign}>
                             {sign}
@@ -33,7 +33,12 @@ function CandleStickSign() {
         )
     }, {
         title: 'CandleStick_Draw',
-        dataIndex: 'candlestick_draw'
+        dataIndex: 'candlestick_draw',
+        render: (_, { candlestick_draw }) => (
+            <>
+                <CandleDraw candlestick_draw={candlestick_draw}/>
+            </>
+        )
     }, {
         title: 'Date',
         dataIndex: 'date'
