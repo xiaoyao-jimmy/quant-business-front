@@ -8,8 +8,14 @@
   "build": {
     "appId": "com.pomo.quant",
     "productName": "Quant Business",
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "electron.js"
+    ],
     "directories": {
-      "output": "dist"
+      "buildResources": "assets",
+      "output": "dist-electron"
     }
   },
   "scripts": {
