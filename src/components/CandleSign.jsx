@@ -1,4 +1,4 @@
-import {Button, Table, Tag, Tooltip} from "antd";
+import {Button, Empty, Table, Tag, Tooltip} from "antd";
 import {useRequest} from "ahooks";
 import {DatePicker} from "antd/lib";
 import {SearchOutlined} from '@ant-design/icons';
@@ -10,9 +10,11 @@ import CandleDraw from "./CandleDraw.jsx";
 
 function CandleStickSign() {
 
-    const [date, setDate] = useState(dayjs().format('YYYY-MM-DD'))
+    const [date, setDate] = useState(dayjs().subtract(1, 'day').format('YYYY-MM-DD'))
 
-    const { data, run } = useRequest(() => getCandleStickSign((date)))
+    const { data, run , loading} = useRequest(() => getCandleStickSign((date)), {
+        manual: true
+    })
 
     const columns = [{
         title: 'Symbol',
@@ -50,13 +52,13 @@ function CandleStickSign() {
 
     return (
         <div>
-            <DatePicker onChange={datePick}/>
+            <DatePicker onChange={datePick} defaultValue={dayjs().subtract(1, 'day')}/>
 
             <Tooltip title={'search'}>
                 <Button type={'primary'} icon={<SearchOutlined />} onClick={run}>查詢</Button>
             </Tooltip>
-            <Table columns={columns} dataSource={data}>
-
+            <Table columns={columns} dataSource={data} pagination={false} loading={loading}
+                   locale={{ emptyText: <Empty description={'选择日期点击查询'} />}}>
             </Table>
         </div>
     )

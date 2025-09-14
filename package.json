@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "main": "electron.js",
+  "main": "electron/electron.js",
   "electron": "electron .",
   "build": {
     "appId": "com.pomo.quant",
@@ -11,7 +11,7 @@
     "files": [
       "dist/**/*",
       "node_modules/**/*",
-      "electron.js"
+      "electron/**/*"
     ],
     "directories": {
       "buildResources": "assets",
@@ -23,6 +23,7 @@
     "electron": "electron .",
     "build": "vite build",
     "dist": "electron-builder",
+    "start": "npm run build && electron .",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
