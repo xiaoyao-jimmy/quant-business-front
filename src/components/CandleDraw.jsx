@@ -35,7 +35,7 @@ function CandleDraw({ candlestick_draw }) {
             })
             .scale('color', {
                 domain: ['下跌', '不变', '上涨'],
-                range: ['#4daf4a', '#999999', '#e41a1c'],
+                range: ['#e41a1c', '#999999', '#4daf4a'],
             });
 
         chart.link()
