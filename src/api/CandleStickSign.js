@@ -6,8 +6,13 @@ axios.defaults.headers.common['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR
 async function getCandleStickSign(date) {
 
     const response = await axios.get(`/candlestick/get_candlestick_sign?date=${date}`)
+    response.data.map(data0 => {
+        data0.candlestick_sign = {
+            'candlestick_bullish_sign': data0.candlestick_bullish_sign,
+            'candlestick_bearish_sign': data0.candlestick_bearish_sign
+        }
+    })
     return response.data
 }
 
 export { getCandleStickSign }
-

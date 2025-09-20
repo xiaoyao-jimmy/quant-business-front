@@ -22,17 +22,40 @@ function CandleStickSign() {
     }, {
         title: 'CandleStick_Signs',
         dataIndex: 'candlestick_sign',
-        render: (_, { candlestick_sign }) => (
-            <>
-                {JSON.parse(candlestick_sign).map((sign) => {
-                    return (
-                        <Tag key={sign}>
-                            {sign}
-                        </Tag>
-                    )
-                })}
-            </>
-        )
+        render: (_, { candlestick_sign }) => {
+            const signs = {}
+            if (candlestick_sign.candlestick_bullish_sign) {
+                JSON.parse(candlestick_sign.candlestick_bullish_sign).map((sign) => {
+                    signs[sign] = 'bullish'
+                })
+            }
+
+            if (candlestick_sign.candlestick_bearish_sign) {
+                JSON.parse(candlestick_sign.candlestick_bearish_sign).map((sign) => {
+                    signs[sign] = 'bearish'
+                })
+            }
+
+            return (
+                <>
+                    {Object.entries(signs).map(([sign, sign_type]) => {
+                        if ('bullish' === sign_type) {
+                            return (
+                                <Tag color={'#4daf4a'} key={sign}>
+                                    {sign}
+                                </Tag>
+                            )
+                        } else {
+                            return (
+                                <Tag color={'#e41a1c'} key={sign}>
+                                    {sign}
+                                </Tag>
+                            )
+                        }
+                    })}
+                </>
+            )
+        }
     }, {
         title: 'CandleStick_Draw',
         dataIndex: 'candlestick_draw',
